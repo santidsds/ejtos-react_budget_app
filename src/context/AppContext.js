@@ -28,7 +28,7 @@ export const AppReducer = (state, action) => {
                 alert("Cannot increase the allocation! Out of funds");
                 return {
                     ...state
-                }
+                } 
             }
             case 'RED_EXPENSE':
                 const red_expenses = state.expenses.map((currentExp)=> {
