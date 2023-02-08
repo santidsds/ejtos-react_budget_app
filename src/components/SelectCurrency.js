@@ -1,22 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 const SelectCurrency = () => {
-    const { budget, currency,expenses } = useContext(AppContext);
+    const { budget, currency,expenses, dispatch } = useContext(AppContext);
+const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
 
-    return (
-        
-        <div class="dropdown show">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Currency
-            </a>
+  const handleSelect = () => {
+      
+      
+      dispatch({
+        type: 'CHG_CURRENCY',
+        payload: '$'
+    });
+  }
 
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-        </div>
-        
-    );
+  return (
+    <div >
+      <button class="btn btn-success dropdown-toggle mt-2" onClick={toggle}>Currency ({currency})</button>
+      {isOpen && (
+        <ul class="drop-menu">
+            <li class="list-group-item">$ Dollar</li>
+            <li class="list-group-item">£ Pound</li>
+            <li class="list-group-item">€ Euro</li>
+            <li class="list-group-item">₹ Ruppee</li>
+        </ul>
+      )}
+    </div>
+  );
 };
 export default SelectCurrency;
